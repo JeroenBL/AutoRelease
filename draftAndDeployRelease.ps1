@@ -10,8 +10,14 @@ param (
 )
 
 try {
-  $changelog = Get-Content -Path 'CHANGELOG.md' -Raw
-  $versionTag = $changelog -match '## \[([^\]]+)' | Select-Object -First 1 -ExpandProperty Matches | ForEach-Object { $_.Groups[1].Value }
+  $changelogContent = Get-Content -Path "CHANGELOG.md" -Raw
+  $latestVersionMatch = $changelogContent -match '(?sm)^##\s*(.*?)\s*-\s*(\d{1,2}-\d{1,2}-\d{4})'
+  if ($latestVersionMatch) {
+      $latestVersion = $matches[1].Trim('[]')
+      Write-Host "Latest Version: $latestVersion"
+  } else {
+      Write-Host "No version found in the CHANGELOG.md file."
+  }
 
   $splatParams = @{
       Uri         = "https://api.github.com/repos/$UserName/$Repository/releases"
@@ -19,7 +25,7 @@ try {
       Headers     = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($GHToken + ":x-oauth-basic")) }
       ContentType = 'application/json'
       Body        = @{
-          tag_name         = $versionTag
+          tag_name         = $latestVersion
           target_commitish = 'main'
           name             = 'Initial'
           body             = 'Initial release'
