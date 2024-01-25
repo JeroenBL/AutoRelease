@@ -14,9 +14,8 @@ try {
   $latestVersionMatch = $changelogContent -match '(?sm)^##\s*(.*?)\s*-\s*(\d{1,2}-\d{1,2}-\d{4})'
   if ($latestVersionMatch) {
       $latestVersion = $matches[1].Trim('[]')
-      Write-Host "Latest Version: $latestVersion"
   } else {
-      Write-Host "No version found in the CHANGELOG.md file."
+      throw "No version found in the CHANGELOG.md file."
   }
 
   $splatParams = @{
