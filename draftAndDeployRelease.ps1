@@ -1,7 +1,7 @@
 param (
   [Parameter(Mandatory)]
   $UserName,
-  
+
   [Parameter(Mandatory)]
   $Repository,
 
@@ -11,7 +11,7 @@ param (
   [Parameter(Mandatory)]
   $ReleaseName,
 
-  [Paramameter(Mandatory)]
+  [Parameter(Mandatory)]
   $Tag,
 
   [Parameter(Mandatory)]
@@ -34,11 +34,9 @@ try {
       } | ConvertTo-Json
 		}
   $response = Invoke-RestMethod @splatParams
-  # Check output of response
 } catch {
   $PSCmdlet.ThrowTerminatingError($_)
 }
-
 
 # Write back the generated release to workflow
 echo "::set-output name=tag::$($response.tag_name)"
