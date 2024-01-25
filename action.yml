@@ -1,0 +1,34 @@
+name: 'AutoRelease'
+description: 'Automatically publishes a new release'
+inputs:
+  UserName: 
+    description:  'Your GitHub UserName'
+    required: true
+  Repository: 
+    description:  'The name of the GitHub repository that will be released'
+    required: true
+  ReleaseNotes: 
+    description:  'The release notes'
+    required: true
+  ReleaseName: 
+    description:  'The name of the release. For example: initial'
+    required: true
+  Tag: 
+    description:  'The release tag that will be created'
+    required: true
+  GHToken: 
+    description:  'Your GitHub token'
+    required: true
+outputs:
+  tag:
+    description: "the release tag that has been created"
+    value: "${{ steps.autorelease.outputs.tag }}"
+  notes:
+    description: "the release notes (description)"
+    value: "${{ steps.autorelease.outputs.notes }}"
+runs:
+  using: "composite"
+  steps:
+    - id: autorelease
+      run: ${{ github.action_path }}/draftAndDeployRelease.ps1 -username ${{ inputs.username }} -repository ${{ inputs.repository }} -releasenotes ${{ inputs.releasenotes }} -releasename ${{ inputs.releasename }} -tag ${{ inputs.tag }} -ghtoken ${{ inputs.ghtoken }} 
+      shell: pwsh
