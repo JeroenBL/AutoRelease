@@ -31,7 +31,7 @@ try {
           draft                  = $false
           prerelease             = $false
           generate_release_notes = $false
-          make_latest            = $true
+          make_latest            = 'true'
       } | ConvertTo-Json
   }
   $response = Invoke-RestMethod @splatParams
