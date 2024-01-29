@@ -34,7 +34,7 @@ This GitHub action uses PowerShell to automatically create a new release based o
 1. Create a new _action_ and _workflow.yaml_ on your repository.
 2. Copy and paste the _yaml_ code pasted below:
 ```yaml
-name: ${{ github.repository }} Release
+name: ConnectorRelease
 
 on:
   pull_request:
@@ -51,7 +51,7 @@ jobs:
 
       - name: Run AutoRelease
         id: autorelease
-        uses: JeroenBL/AutoRelease@latest
+        uses: JeroenBL/AutoRelease@v0.7
         with:
           UserName: JeroenBL
           Repository: ReleaseTest
