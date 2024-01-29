@@ -34,35 +34,30 @@ This GitHub action uses PowerShell to automatically create a new release based o
 1. Create a new _action_ and _workflow.yaml_ on your repository.
 2. Copy and paste the _yaml_ code pasted below:
 ```yaml
-name: AutoRelease
+name: name: ${{ github.repository }} Release
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
-  run-custom-action:
-
+  if_merged:
     runs-on: ubuntu-latest
-
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Run AutoRelease
         id: autorelease
-        uses: JeroenBL/AutoRelease@v0.5
+        uses: JeroenBL/AutoRelease@latest
         with:
           UserName: JeroenBL
           Repository: ReleaseTest
-          GHToken: ${{ secrets.GHTOKEN }}
+          GHToken: ${{ secrets.GTOKEN }} 
 
       - name: Display AutoRelease Output
         run: |
           echo "AutoRelease Message: ${{ steps.autorelease.outputs.message }}"
 ```
-3. Make sure to use the latest version of _AutoRelease_. ```JeroenBL/AutoRelease@x.x```
-
-> [!TIP]
-> Make sure to check latest releases on: https://github.com/JeroenBL/AutoRelease/tags
