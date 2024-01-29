@@ -44,7 +44,7 @@ on:
 jobs:
   if_merged:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
