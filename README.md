@@ -1,9 +1,9 @@
 # AutoRelease
 
-This GitHub action uses PowerShell to automatically create a new release based on information in your _CHANGELOG.md_.
+This GitHub action uses PowerShell to automatically create a new release based on information in the _CHANGELOG.md_.
 
 <p align="center">
-  <img src="./logo.png">
+  <img src="./logo.png" width="300">
 </p>
 
 - [AutoRelease](#autorelease)
@@ -17,9 +17,6 @@ This GitHub action uses PowerShell to automatically create a new release based o
 - [ ] CHANGELOG.md file specified in your repository.
 - [ ] Repository secret _GHToken_ to securely use the GitHub API's.
 
-> [!TIP]
-> You can use your own Personal Access Tokens or organization tokens.
-
 ## Installation
 
 ### GHToken
@@ -29,10 +26,14 @@ This GitHub action uses PowerShell to automatically create a new release based o
 3. Browse to `Secrets and variables -> Actions`.
 4. Specify a new token with the name _GHToken_.
 
+>[!TIP]
+> A _fine grained_ token is required if this extension will be executed from organization repositories.
+
 ### Action
 
-1. Create a new _action_ and _workflow.yaml_ on your repository.
-2. Copy and paste the _yaml_ code pasted below:
+1. Go to the repository for which you want to execute this action.
+2. Create a new _action_ and _workflow.yaml_ on your repository.
+3. Copy and paste the _yaml_ code pasted below:
 ```yaml
 name: ConnectorRelease
 
@@ -55,7 +56,7 @@ jobs:
         with:
           UserName: JeroenBL
           Repository: ReleaseTest
-          GHToken: ${{ secrets.GTOKEN }} 
+          GHToken: ${{ secrets.GTOKEN }}
 
       - name: Display AutoRelease Output
         run: |
