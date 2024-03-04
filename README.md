@@ -1,5 +1,5 @@
 # AutoRelease
-
+some changes
 This GitHub action uses PowerShell to automatically create a new release based on information in the _CHANGELOG.md_.
 
 <p align="center">
@@ -18,7 +18,7 @@ This GitHub action uses PowerShell to automatically create a new release based o
 - [ ] Repository secret _GHToken_ to securely use the GitHub API's.
 
 ## Installation
-
+some changes
 ### GHToken
 
 1. Go to your GitHub repository on which the action will be run.
@@ -62,3 +62,5 @@ jobs:
         run: |
           echo "AutoRelease Message: ${{ steps.autorelease.outputs.message }}"
 ```
+
+some changes

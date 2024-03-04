@@ -17,7 +17,7 @@ try {
   } else {
       throw "No version found in the CHANGELOG.md file."
   }
-
+some changes
   $splatParams = @{
       Uri         = "https://api.github.com/repos/$UserName/$Repository/releases"
       Method      = 'POST'
@@ -37,6 +37,7 @@ try {
   $response = Invoke-RestMethod @splatParams
   $message = "Created release with tag: $($response.tag_name)"
 } catch {
+some changes
   $PSCmdlet.ThrowTerminatingError($_)
 }
 
