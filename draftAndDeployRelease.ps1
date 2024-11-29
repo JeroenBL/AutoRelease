@@ -21,7 +21,7 @@ try {
   $splatParams = @{
       Uri         = "https://api.github.com/repos/$UserName/$Repository/releases"
       Method      = 'POST'
-      Headers     = @{Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($GHToken + ":x-oauth-basic")) }
+      Headers     = @{Authorization = "Bearer $GHToken"}
       ContentType = 'application/json'
       Body        = @{
           tag_name               = $latestVersion
