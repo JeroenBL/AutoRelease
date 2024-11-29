@@ -16,7 +16,9 @@ outputs:
     value: "${{ steps.autorelease.outputs.message }}"
 runs:
   using: "composite"
+   env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   steps:
     - id: autorelease
-      run: ${{ github.action_path }}/draftAndDeployRelease.ps1 -username ${{ inputs.username }} -repository ${{ inputs.repository }} -ghtoken ${{ inputs.ghtoken }} 
+      run: ${{ github.action_path }}/draftAndDeployRelease.ps1 -username ${{ inputs.username }} -repository ${{ inputs.repository }} -ghtoken ${{ secrets.GITHUB_TOKEN }} 
       shell: pwsh
